@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>VSLX</title>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TNLBBT5G');</script>
+<!-- End Google Tag Manager -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --red:#de2800; --dark:#292929; --text:#1a1a1a; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',ui-rounded,system-ui,sans-serif;background:#fff;color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;height:auto;display:block}
+
+  .topbar{background:var(--red);color:#fff;text-align:center;padding:16px 20px;font-size:18px;font-weight:600;line-height:1.4}
+  .topbar strong{color:#000;font-weight:800}
+  @media(max-width:480px){ .topbar{font-size:15px} }
+
+  .wrap{max-width:760px;margin:0 auto;padding:34px 20px 40px;text-align:center}
+
+  .notice{font-size:24px;font-weight:400;line-height:1.4;margin-bottom:24px}
+  .notice .date{color:var(--red);font-weight:700}
+  @media(max-width:480px){ .notice{font-size:18px} }
+
+  .video-box{margin:0 auto;max-width:760px}
+
+  /* rodapé agora com links legales y avisos (compliance) */
+  .foot{background:var(--dark);color:#fff;text-align:center;padding:26px 20px 30px}
+  .foot-links{margin-bottom:12px;font-size:14px}
+  .foot-links a{color:#e6e6e6;text-decoration:none;font-weight:700;margin:0 9px;white-space:nowrap}
+  .foot-disc{font-size:12.5px;opacity:.72;line-height:1.55;max-width:640px;margin:0 auto 8px}
+  .foot-copy{font-size:12.5px;opacity:.85;margin-top:10px}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNLBBT5G"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+  <!-- ═══ BARRA DO TOPO ═══ -->
+  <div class="topbar">
+    Tú y algunas personas de <strong id="ciudad">tu ciudad</strong> han sido seleccionadas para ver esta presentación.
+  </div>
+
+  <div class="wrap">
+
+    <!-- ═══ AVISO — a data é automática ═══ -->
+    <h2 class="notice">
+      Mira hasta el final. Esta presentación saldrá del aire el
+      <span class="date" id="fecha">hoy</span>.
+    </h2>
+
+    <!-- ═══ VÍDEO ═══ -->
+    <div class="video-box">
+      <vturb-smartplayer id="vid-6a30b3bc6b6c39cec4fdcfdd" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/65eee9f4-ec2d-46b0-a2b3-9b1ecf0653c2/players/6a30b3bc6b6c39cec4fdcfdd/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+    </div>
+
+  </div>
+
+  <!-- ═══ RODAPÉ (só os avisos, sem links legais) ═══ -->
+  <footer class="foot">
+    <p class="foot-disc">Este sitio no forma parte de Facebook ni de Meta Platforms, Inc., y no está respaldado por ellos en modo alguno. Facebook e Instagram son marcas de Meta Platforms, Inc.</p>
+    <p class="foot-disc">Contenido informativo, dirigido a personas mayores de 18 años. Los resultados varían de una persona a otra y no están garantizados.</p>
+    <p class="foot-copy">© 2026 · Todos los derechos reservados.</p>
+  </footer>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+/* [ CIUDAD ] */
+(function(){
+  var ciudades = ['Ciudad de México','Buenos Aires','Bogotá','Lima','Santiago','Guadalajara',
+    'Monterrey','Medellín','Córdoba','Quito','Caracas','Santo Domingo','Guayaquil','Puebla',
+    'Rosario','Cali','Montevideo','San José','Ciudad de Panamá','Asunción'];
+  var el = document.getElementById('ciudad');
+  function setCity(name){ if(el && name){ el.textContent = name; } }
+  setCity(ciudades[Math.floor(Math.random()*ciudades.length)]);
+  fetch('https://ipwho.is/').then(function(r){return r.json();}).then(function(d){
+    if(d && d.city){ setCity(d.city); }
+  }).catch(function(){
+    fetch('https://get.geojs.io/v1/ip/geo.json').then(function(r){return r.json();}).then(function(d){
+      if(d && d.city){ setCity(d.city); }
+    }).catch(function(){});
+  });
+})();
+
+/* [ FECHA ] — data de HOY en español */
+(function(){
+  var meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var d=new Date();
+  document.getElementById('fecha').textContent = d.getDate()+' de '+meses[d.getMonth()]+' de '+d.getFullYear();
+})();
+</script>
+
+</body>
+</html>
